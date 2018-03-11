@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StartStop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crash.james.fitness.WorkoutActivity">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCurrentExercise"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
+
+            <EditText
+                android:id="@+id/txtClock"
+                android:layout_width="match_parent"
+                android:layout_height="133dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:inputType="time"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="0dp"
+                android:elevation="0dp"
+                android:orientation="horizontal"
+                android:paddingBottom="0dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabPrev"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="nextExercise"
+                    app:srcCompat="@drawable/quantum_ic_skip_previous_grey600_36"
+                    tools:layout_editor_absoluteX="72dp"
+                    tools:layout_editor_absoluteY="278dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startStop"
+                    app:srcCompat="@drawable/mr_media_play_light"
+                    tools:layout_editor_absoluteX="138dp"
+                    tools:layout_editor_absoluteY="255dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fabNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="prevExercise"
+                    app:srcCompat="@drawable/quantum_ic_skip_next_grey600_36"
+                    tools:layout_editor_absoluteX="249dp"
+                    tools:layout_editor_absoluteY="278dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtNext"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+

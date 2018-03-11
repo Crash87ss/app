@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "203348965518",
+    "firebase_url": "https://fitness-intime.firebaseio.com",
+    "project_id": "fitness-intime",
+    "storage_bucket": "fitness-intime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203348965518:android:2a591d6d385a6904",
+        "android_client_info": {
+          "package_name": "com.crash.james.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203348965518-sbkivcg5306nredk4p5n4qv9jnmn94oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crash.james.fitness",
+            "certificate_hash": "45630ed7378c832fd84311ad7b8da952bdb46941"
+          }
+        },
+        {
+          "client_id": "203348965518-qh73vqf26tb3hic1mtib0coe5m3ajhqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBJXMEXSlXQz9t65rUOAf-1klOpyZbfNU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203348965518-qh73vqf26tb3hic1mtib0coe5m3ajhqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
