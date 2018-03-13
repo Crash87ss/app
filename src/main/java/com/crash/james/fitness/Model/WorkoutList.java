@@ -30,7 +30,7 @@ public class WorkoutList  {
         mWorkouts.add(workout);
     }
 
-    public void addList(ArrayList<Workout> workouts){
+     public void addList(ArrayList<Workout> workouts){
         if (mWorkouts.isEmpty()){
             mWorkouts.addAll(workouts);
         } else {

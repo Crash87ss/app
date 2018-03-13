@@ -38,12 +38,13 @@
                 android:ems="10"
                 android:inputType="time"
                 android:textAlignment="center"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:clickable="false"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginBottom="8dp"
                 android:elevation="0dp"
                 android:orientation="horizontal"
                 android:paddingBottom="0dp">
@@ -77,7 +78,7 @@
                     android:id="@+id/fabNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginTop="25dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -91,14 +92,21 @@
             <TextView
                 android:id="@+id/txtNext"
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_weight="1"
+                android:layout_weight=".5"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textAllCaps="true" />
+            <TextView
+                android:id="@+id/txtTimeRemaining"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".5"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -275,10 +275,11 @@ public class SelectActivity extends FragmentActivity {
 
             querysWaiting.clear();
             querysCompleted.clear();
-            //Once complete open dialog fragment
+            //Once complete open dialog fragment. Data is sent via a bundle
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("exercises", exerciseSelection);
 
+            //The workout is added to singleton list. this should allow it to maintain state through activity changes.
             WorkoutList workoutList = WorkoutList.getInstance();
             workoutList.addList(exerciseSelection);
 
