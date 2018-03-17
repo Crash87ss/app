@@ -22,10 +22,10 @@ public class WorkoutActivity extends AppCompatActivity {
     List<Workout> mExercise;
     Workout currentExercise;
     WorkoutList workoutList = WorkoutList.getInstance();
-    long runTime,curTime, restTime,secondsUntillFinished, minutesUntilFinished;
+    long runTime,curTime, restTime,secondsUntilFinished, minutesUntilFinished;
     long interval = 250;
     TextView txtClock, txtExercise, txtNextExercise, txtTimeRemaining;
-    boolean resting = false;
+    boolean resting = true;
     int intCurrentExercise = 0;
     int intCurSet;
     short sSwitch = 1;  //1: !playing !paused, 2 Playing, 3 paused
@@ -57,18 +57,18 @@ public class WorkoutActivity extends AppCompatActivity {
 
         //Sum total time in the workout
         for (int i = 0; i < mExercise.size(); i++){
-            secondsUntillFinished = mExercise.get(i).getTime() * mExercise.get(i).getSets() + restTime / 1000 * mExercise.get(i).getSets();
+            secondsUntilFinished = mExercise.get(i).getTime() * mExercise.get(i).getSets() + restTime / 1000 * mExercise.get(i).getSets();
         }
 
-        minutesUntilFinished = secondsUntillFinished / 60;
-        secondsUntillFinished = secondsUntillFinished % 60;
+        minutesUntilFinished = secondsUntilFinished / 60;
+        secondsUntilFinished = secondsUntilFinished % 60;
 
-        txtTimeRemaining.setText(getString(R.string.time_Remaining, minutesUntilFinished,secondsUntillFinished));
+        txtTimeRemaining.setText(getString(R.string.time_Remaining, minutesUntilFinished,secondsUntilFinished));
     }
 
    public class MyCountdown extends CountDownTimer {
 
-        public MyCountdown (long millisInFuture, long countDownInterval){
+         MyCountdown (long millisInFuture, long countDownInterval){
                 super(millisInFuture, countDownInterval);
             }
 
@@ -85,10 +85,8 @@ public class WorkoutActivity extends AppCompatActivity {
 
            @Override
            public void onFinish() {
-               sSwitch = 1;
+               //sSwitch = 1;
                //fabPlayPause.setImageResource(R.drawable.mr_media_play_dark);
-
-
                if(intCurrentExercise == mExercise.size() - 1){
                    //ToDo: workout is complete
                } else if (intCurSet == currentExercise.getSets() && !resting) {
@@ -96,17 +94,25 @@ public class WorkoutActivity extends AppCompatActivity {
                    currentExercise = mExercise.get(intCurrentExercise);
                    txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
                    txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
-                 } else if(resting) {
-                   curTime = restTime;
+                   resting = true;
+                   timer.start();
+                 } else if(intCurSet <= currentExercise.getSets() && resting) {
+                   curTime = currentExercise.getTime() / 5; //time in ms
                    resting = false;
                    intCurSet++;
-                   timer.start();
                    txtExercise.setText("Rest");
                    txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
+                   timer.start();
+               } else if(intCurSet < currentExercise.getSets() && !resting){
+                   curTime = currentExercise.getTime();
+                   txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
+                   txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
+                   resting = true;
+                   timer.start();
                } else{
                    //ToDo: Error
                }
-               resting = true;
+
 
            }
 
@@ -114,16 +120,16 @@ public class WorkoutActivity extends AppCompatActivity {
 
     public class TotalCountDown extends CountDownTimer{
 
-        public TotalCountDown (long millisInFuture, long countDownInterval){
+        TotalCountDown (long millisInFuture, long countDownInterval){
             super(millisInFuture,countDownInterval);
         }
         @Override
         public void onTick(long millisUntilFinished){
 
             minutesUntilFinished = millisUntilFinished / 60000;
-            secondsUntillFinished = (millisUntilFinished / 1000) % 60;
+            secondsUntilFinished = (millisUntilFinished / 1000) % 60;
 
-            txtTimeRemaining.setText(getString(R.string.time_Remaining, minutesUntilFinished,secondsUntillFinished));
+            txtTimeRemaining.setText(getString(R.string.time_Remaining, minutesUntilFinished,secondsUntilFinished));
         }
 
         @Override
@@ -138,7 +144,7 @@ public class WorkoutActivity extends AppCompatActivity {
             case 1:
                 runTime = 1000 * currentExercise.getTime();
                 timer = new MyCountdown(runTime, interval);
-                totalCountDown = new TotalCountDown(secondsUntillFinished * 1000, 1000);
+                totalCountDown = new TotalCountDown((secondsUntilFinished + (minutesUntilFinished *60)) * 1000, 1000);
                 fabPlayPause.setImageResource(R.drawable.mr_media_pause_dark);
                 timer.start();
                 totalCountDown.start();
