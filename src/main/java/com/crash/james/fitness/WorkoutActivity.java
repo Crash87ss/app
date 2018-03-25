@@ -22,7 +22,7 @@ public class WorkoutActivity extends AppCompatActivity {
     List<Workout> mExercise;
     Workout currentExercise;
     WorkoutList workoutList = WorkoutList.getInstance();
-    long runTime,curTime, restTime,secondsUntilFinished, minutesUntilFinished;
+    long runTime,curTime, restTime, restTimeMultiplier, secondsUntilFinished, minutesUntilFinished;
     long interval = 250;
     TextView txtClock, txtExercise, txtNextExercise, txtTimeRemaining;
     boolean resting = true;
@@ -47,7 +47,7 @@ public class WorkoutActivity extends AppCompatActivity {
         currentExercise = mExercise.get(intCurrentExercise);
         intCurSet = 1;
 
-        restTime = 30000; // ToDo: make this a setting option variable
+        //restTime = 30000; // ToDo: make this a setting option variable
 
         txtClock.setText(String.format(Locale.US,"%1$02d%n : %2$02d%n : %3$02d%n", currentExercise.getTime()/60000, (currentExercise.getTime()/1000)%60 , 0));  //initial clock setting
         //txtExercise.setText("Current Exercise: " + currentExercise.getName() + "Set: " + intCurSet + "of " + currentExercise.getSets());
@@ -57,7 +57,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         //Sum total time in the workout
         for (int i = 0; i < mExercise.size(); i++){
-            secondsUntilFinished = mExercise.get(i).getTime() * mExercise.get(i).getSets() + restTime / 1000 * mExercise.get(i).getSets();
+            secondsUntilFinished += mExercise.get(i).getTime() * mExercise.get(i).getSets() + restTime / 1000 * mExercise.get(i).getSets();
         }
 
         minutesUntilFinished = secondsUntilFinished / 60;
@@ -95,21 +95,30 @@ public class WorkoutActivity extends AppCompatActivity {
                    txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
                    txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
                    resting = true;
+                   runTime = 1000 * currentExercise.getTime();
+                   timer = new MyCountdown(runTime, interval);
                    timer.start();
-                 } else if(intCurSet <= currentExercise.getSets() && resting) {
-                   curTime = currentExercise.getTime() / 5; //time in ms
-                   resting = false;
-                   intCurSet++;
-                   txtExercise.setText("Rest");
-                   txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
-                   timer.start();
-               } else if(intCurSet < currentExercise.getSets() && !resting){
+                } else if(intCurSet < currentExercise.getSets() && !resting){
                    curTime = currentExercise.getTime();
                    txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
                    txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
                    resting = true;
+                   runTime = 1000 * currentExercise.getTime();
+                   timer = new MyCountdown(runTime, interval);
                    timer.start();
-               } else{
+               } else if(intCurSet <= currentExercise.getSets() && resting) {
+                   //curTime = currentExercise.getTime() / 5; //time in ms
+                   resting = false;
+                   restTime = currentExercise.getTime() * 200;
+                   if(intCurSet < currentExercise.getSets()) {
+                       intCurSet++;
+                   }
+                   txtExercise.setText("Rest");
+                   txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
+                   runTime = restTime;
+                   timer = new MyCountdown(runTime, interval);
+                   timer.start();
+               }else{
                    //ToDo: Error
                }
 
@@ -172,8 +181,9 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
     public void nextExercise(View view){
+
         timer.cancel();
-       sSwitch = 1;
+        sSwitch = 1;
 
         if(intCurrentExercise < mExercise.size() - 1) {
             intCurrentExercise++;

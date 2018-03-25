@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Fitness</string>
     <string name="action_settings">Settings</string>
-    <string name="current_exercise">Current Exercise: %1$s /nSet %2$d of %3$d </string>
+    <string name="current_exercise">Current Exercise: %1$s /n Set %2$d of %3$d </string>
     <string name="next_exercise">Next Exercise: %1$s</string>
     <string name="time_Remaining">Time Remaining: %1$02d : %2$02d</string>
 </resources>
