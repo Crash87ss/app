@@ -91,6 +91,7 @@ public class WorkoutActivity extends AppCompatActivity {
                    //ToDo: workout is complete
                } else if (intCurSet == currentExercise.getSets() && !resting) {
                    intCurrentExercise++;
+                   intCurSet = 1;
                    currentExercise = mExercise.get(intCurrentExercise);
                    txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
                    txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
@@ -198,7 +199,7 @@ public class WorkoutActivity extends AppCompatActivity {
         txtExercise.setText(getString(R.string.current_exercise,currentExercise.getName(),intCurSet,currentExercise.getSets()));
 
         if (intCurrentExercise == mExercise.size() - 1 ) {
-            txtNextExercise.setText(mExercise.get(0).getName());
+            txtNextExercise.setText(getString(R.string.current_exercise,mExercise.get(0).getName(),intCurSet,currentExercise.getSets()));
         } else {
             txtNextExercise.setText(getString(R.string.next_exercise,mExercise.get(intCurrentExercise+1).getName()));
         }
