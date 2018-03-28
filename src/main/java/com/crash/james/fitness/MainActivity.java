@@ -20,25 +20,5 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SelectActivity.class);
         startActivity(i);
             }
-/*
-        Button bSelectWorkout = findViewById(R.id.selectWorkout);
-        Button bLogin = findViewById(R.id.login);
-
-        bSelectWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, SelectActivity.class);
-                startActivity(i);
-            }
-        });
-
-        bLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), TestACtivity.class);
-                startActivity(i);
-            }
-        });*/
-
     }
 
